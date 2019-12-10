@@ -1,0 +1,25 @@
+###########################################################
+###################### General Setup ######################
+###########################################################
+
+### Paths #################################################
+
+### ホストとコンテナ内ディレクトリをマウント ###
+APP_CODE_PATH_HOST=./workspace/nginx
+APP_CODE_PATH_NGINX_CONTAINER=/var/www
+php_CODE_PATH_CONTAINER=/var/www/
+DB_PATH_HOST=./docker/mysql
+DB_PATH_CONTAINER=/data
+
+### ポート開放 ###
+HOST_NGINX_PORT=8081
+CONTAINER_NGINX_PORT=80
+HOST_PHP_PORT=9000
+CONTAINER_PHP_PORT=9000
+
+### データベース情報 ###
+DB_HOST_PORT=3306
+DB_CONTAINER_PORT=3306
+DB=test
+DB_USER=docker
+DB_PASSWORD=docker
