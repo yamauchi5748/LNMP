@@ -6,12 +6,21 @@ services:
       context: ./docker/nginx # Dockerfile保存場所
     container_name: nginx # コンテナ名
     tty: true
-    ports: # ポート接続
-      - ${HOST_NGINX_PORT}:${CONTAINER_NGINX_PORT}
+    restart: always
     volumes: # mount workdir
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_NGINX_CONTAINER}
     depends_on:
       - php
+
+  proxy: # nginxと同じイメージ
+    build:
+      context: ./docker/nginx # Dockerfile保存場所
+    container_name: proxy # コンテナ名
+    tty: true
+    ports: # ポート接続
+      - ${HOST_PROXY_PORT}:${CONTAINER_PROXY_PORT}
+    depends_on:
+      - nginx
 
   php:
     build:
