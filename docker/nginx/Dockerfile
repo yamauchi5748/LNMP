@@ -7,7 +7,6 @@ RUN chown -R nginx /var/cache/nginx \
 USER nginx:nginx
 
 COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
-COPY conf.d/proxy.conf /etc/nginx/conf.d/proxy.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # 作業ディレクトリ作成&設定

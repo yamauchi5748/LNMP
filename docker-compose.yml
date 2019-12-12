@@ -9,6 +9,7 @@ services:
     restart: always
     volumes: # mount workdir
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_NGINX_CONTAINER}
+      - ./docker/nginx/conf.d/nginx.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - php
 
@@ -19,6 +20,8 @@ services:
     tty: true
     ports: # ポート接続
       - ${HOST_PROXY_PORT}:${CONTAINER_PROXY_PORT}
+    volumes:
+      - ./docker/nginx/conf.d/proxy.conf:/etc/nginx/conf.d/proxy.conf
     depends_on:
       - nginx
 
