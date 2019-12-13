@@ -1,15 +1,29 @@
 version: "3.7"
 
 services:
-  nginx:
+  web1:
     build:
       context: ./docker/nginx # Dockerfile保存場所
-    container_name: nginx # コンテナ名
+    container_name: web1 # コンテナ名
+    privileged: true
     tty: true
     restart: always
     volumes: # mount workdir
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_NGINX_CONTAINER}
-      - ./docker/nginx/conf.d/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./docker/nginx/conf.d/web1.conf:/etc/nginx/conf.d/web1.conf
+    depends_on:
+      - php
+
+  web2:
+    build:
+      context: ./docker/nginx # Dockerfile保存場所
+    container_name: web2 # コンテナ名
+    privileged: true
+    tty: true
+    restart: always
+    volumes: # mount workdir
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_NGINX_CONTAINER}
+      - ./docker/nginx/conf.d/web2.conf:/etc/nginx/conf.d/web2.conf
     depends_on:
       - php
 
@@ -17,13 +31,16 @@ services:
     build:
       context: ./docker/nginx # Dockerfile保存場所
     container_name: proxy # コンテナ名
+    privileged: true
     tty: true
+    restart: always
     ports: # ポート接続
       - ${HOST_PROXY_PORT}:${CONTAINER_PROXY_PORT}
     volumes:
       - ./docker/nginx/conf.d/proxy.conf:/etc/nginx/conf.d/proxy.conf
     depends_on:
-      - nginx
+      - web1
+      - web2
 
   php:
     build:

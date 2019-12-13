@@ -5,7 +5,7 @@
 ### Paths #################################################
 
 ### ホストとコンテナ内ディレクトリをマウント ###
-APP_CODE_PATH_HOST=./workspace/nginx
+APP_CODE_PATH_HOST=./workspace/web
 APP_CODE_PATH_NGINX_CONTAINER=/var/www
 php_CODE_PATH_CONTAINER=/var/www/
 DB_PATH_HOST=./docker/mysql
